@@ -3,9 +3,9 @@ package platform
 import "errors"
 
 type HardwareDescriptor struct {
-	Memory     *int
-	Storage    *int
-	Processors *ProcessorsDescriptor
+	Memory     *int                  `yaml:"memory,omitempty"`
+	Storage    *int                  `yaml:"storage,omitempty"`
+	Processors *ProcessorsDescriptor `yaml:"processors,omitempty"`
 }
 
 func (h *HardwareDescriptor) Validate() error {

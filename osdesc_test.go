@@ -14,7 +14,7 @@ func TestOperatingSystemDescriptor_GetArchitecture(t *testing.T) {
 		DownloadURLs        []string
 		Flavor              *string
 		DocumentationURL    *string
-		RecommendedHardware Hardware
+		RecommendedHardware *HardwareDescriptor
 	}
 	tests := []struct {
 		name   string
@@ -59,7 +59,7 @@ func TestOperatingSystemDescriptor_GetDocumentationURL(t *testing.T) {
 		DownloadURLs        []string
 		Flavor              *string
 		DocumentationURL    *string
-		RecommendedHardware Hardware
+		RecommendedHardware *HardwareDescriptor
 	}
 	tests := []struct {
 		name   string
@@ -109,7 +109,7 @@ func TestOperatingSystemDescriptor_GetDownloadURLs(t *testing.T) {
 		DownloadURLs        []string
 		Flavor              *string
 		DocumentationURL    *string
-		RecommendedHardware Hardware
+		RecommendedHardware *HardwareDescriptor
 	}
 	tests := []struct {
 		name   string
@@ -152,7 +152,7 @@ func TestOperatingSystemDescriptor_GetFlavor(t *testing.T) {
 		DownloadURLs        []string
 		Flavor              *string
 		DocumentationURL    *string
-		RecommendedHardware Hardware
+		RecommendedHardware *HardwareDescriptor
 	}
 	tests := []struct {
 		name   string
@@ -195,7 +195,7 @@ func TestOperatingSystemDescriptor_GetName(t *testing.T) {
 		DownloadURLs        []string
 		Flavor              *string
 		DocumentationURL    *string
-		RecommendedHardware Hardware
+		RecommendedHardware *HardwareDescriptor
 	}
 	tests := []struct {
 		name   string
@@ -238,7 +238,7 @@ func TestOperatingSystemDescriptor_GetRecommendedHardware(t *testing.T) {
 		DownloadURLs        []string
 		Flavor              *string
 		DocumentationURL    *string
-		RecommendedHardware Hardware
+		RecommendedHardware *HardwareDescriptor
 	}
 	tests := []struct {
 		name   string
@@ -281,7 +281,7 @@ func TestOperatingSystemDescriptor_GetRelease(t *testing.T) {
 		DownloadURLs        []string
 		Flavor              *string
 		DocumentationURL    *string
-		RecommendedHardware Hardware
+		RecommendedHardware *HardwareDescriptor
 	}
 	tests := []struct {
 		name   string
@@ -324,7 +324,7 @@ func TestOperatingSystemDescriptor_GetVersion(t *testing.T) {
 		DownloadURLs        []string
 		Flavor              *string
 		DocumentationURL    *string
-		RecommendedHardware Hardware
+		RecommendedHardware *HardwareDescriptor
 	}
 	tests := []struct {
 		name   string
@@ -371,7 +371,7 @@ func TestOperatingSystemDescriptor_Validate(t *testing.T) {
 		DownloadURLs        []string
 		Flavor              *string
 		DocumentationURL    *string
-		RecommendedHardware Hardware
+		RecommendedHardware *HardwareDescriptor
 	}
 	tests := []struct {
 		name    string

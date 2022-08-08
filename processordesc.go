@@ -3,8 +3,8 @@ package platform
 import "errors"
 
 type ProcessorsDescriptor struct {
-	Count *int
-	Cores *int
+	Count *int `yaml:"count,omitempty"`
+	Cores *int `yaml:"cores,omitempty"`
 }
 
 func (p *ProcessorsDescriptor) GetCount() int {

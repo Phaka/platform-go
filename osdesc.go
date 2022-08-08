@@ -1,16 +1,27 @@
 package platform
 
-import "errors"
+import (
+	"errors"
+	"gopkg.in/yaml.v3"
+)
 
 type OperatingSystemDescriptor struct {
-	Name                string
-	Version             *string
-	Architecture        string
-	Release             *string
-	DownloadURLs        []string
-	Flavor              *string
-	DocumentationURL    *string
-	RecommendedHardware Hardware
+	Name                string              `yaml:"name,omitempty"`
+	Version             *string             `yaml:"version,omitempty"`
+	Architecture        string              `yaml:"architecture,omitempty"`
+	Release             *string             `yaml:"release,omitempty"`
+	DownloadURLs        []string            `yaml:"downloads,omitempty"`
+	Flavor              *string             `yaml:"flavor,omitempty"`
+	DocumentationURL    *string             `yaml:"documentation,omitempty"`
+	RecommendedHardware *HardwareDescriptor `yaml:"hardware,omitempty"`
+}
+
+func (o *OperatingSystemDescriptor) String() string {
+	bytes, err := yaml.Marshal(o)
+	if err != nil {
+		return ""
+	}
+	return string(bytes)
 }
 
 func (o *OperatingSystemDescriptor) Validate() error {
