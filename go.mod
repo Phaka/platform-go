@@ -1,4 +1,4 @@
-module platform-go
+module github.com/phaka/platform-go
 
 go 1.13
 
