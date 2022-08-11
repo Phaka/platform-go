@@ -1,0 +1,13 @@
+name: OpenBSD
+downloads:
+  - https://mirrors.ocf.berkeley.edu/pub/OpenBSD/7.1/amd64/install71.iso
+documentation: https://www.openbsd.org/faq/index.html
+architecture: amd64
+release: "7.1"
+version: "7.1"
+hardware:
+  memory: 2048
+  storage: 8192
+  processors:
+    count: 1
+    cores: 1
