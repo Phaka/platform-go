@@ -2,6 +2,7 @@ package platform
 
 import (
 	"errors"
+	"io/ioutil"
 
 	"gopkg.in/yaml.v3"
 )
@@ -17,6 +18,14 @@ type OperatingSystemDescriptor struct {
 	RecommendedHardware *HardwareDescriptor    `yaml:"hardware,omitempty"`
 	BootMethods         *BootMethodsDescriptor `yaml:"boot,omitempty"`
 	Hypervisors         *HypervisorsDescriptor `yaml:"hypervisors,omitempty"`
+}
+
+func (o *OperatingSystemDescriptor) Save(path string) error {
+	bytes, err := yaml.Marshal(o)
+	if err != nil {
+		return err
+	}
+	return ioutil.WriteFile(path, bytes, 0644)
 }
 
 var defaultBootMethod = &BootMethodDescriptor{
@@ -44,6 +53,14 @@ var defaultHypervisors = &HypervisorsDescriptor{
 		NetworkAdapterType: nil,
 		Firmware:           nil,
 	},
+}
+
+func (o *OperatingSystemDescriptor) Parse(b []byte) error {
+	err := yaml.Unmarshal(b, o)
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *OperatingSystemDescriptor) GetHypervisors() Hypervisors {
