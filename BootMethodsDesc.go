@@ -1,9 +1,9 @@
 package platform
 
 type BootMethodsDescriptor struct {
-	Http   *BootMethodDescriptor `yaml:"http"`
-	Cdrom  *BootMethodDescriptor `yaml:"cdrom"`
-	Floppy *BootMethodDescriptor `yaml:"floppy"`
+	Http   *BootMethodDescriptor `yaml:"http,omitempty"`
+	Cdrom  *BootMethodDescriptor `yaml:"cdrom,omitempty"`
+	Floppy *BootMethodDescriptor `yaml:"floppy,omitempty"`
 }
 
 func (b *BootMethodsDescriptor) GetHttp() BootMethod {
