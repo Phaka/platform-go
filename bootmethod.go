@@ -12,5 +12,5 @@ type BootMethod interface {
 	GetWait() string
 
 	// GetVariables returns the variables to set when generating the response file
-	GetVariables() []VariableDescriptor
+	GetVariables() []Variable
 }
