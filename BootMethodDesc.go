@@ -1,9 +1,10 @@
 package platform
 
 type BootMethodDescriptor struct {
-	Commands *string           `yaml:"commands,omitempty"`
-	Files    map[string]string `yaml:"files,omitempty"`
-	Delay    *string           `yaml:"delay,omitempty"`
+	Commands  *string              `yaml:"commands,omitempty"`
+	Files     map[string]string    `yaml:"files,omitempty"`
+	Delay     *string              `yaml:"delay,omitempty"`
+	Variables []VariableDescriptor `yaml:"variables,omitempty"`
 }
 
 func (b *BootMethodDescriptor) GetWait() string {
@@ -22,4 +23,8 @@ func (b *BootMethodDescriptor) GetCommands() string {
 
 func (b *BootMethodDescriptor) GetFiles() map[string]string {
 	return b.Files
+}
+
+func (b *BootMethodDescriptor) GetVariables() []VariableDescriptor {
+	return b.Variables
 }
