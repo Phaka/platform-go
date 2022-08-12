@@ -1,9 +1,9 @@
 package platform
 
 type VariableDescriptor struct {
-	Name         string  `yaml:"name"`
-	DefaultValue *string `yaml:"default"`
-	Type         *string `yaml:"type"`
+	Name         string  `yaml:"name,omitempty"`
+	DefaultValue *string `yaml:"default,omitempty"`
+	Type         *string `yaml:"type,omitempty"`
 }
 
 func (v *VariableDescriptor) GetName() string {
