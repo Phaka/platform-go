@@ -11,6 +11,29 @@ hardware:
   processors:
     count: 1
     cores: 1
+boot:
+
+  http:
+    commands: |-
+      this
+    files:
+      file1.conf: |-
+        line 1
+        line 2
+  cdrom:
+    commands: |-
+      that
+    files:
+      file2.conf: |-
+        line 3
+        line 4
+  floppy:
+    commands: |-
+      zat
+    files:
+      file3.conf: |-
+        line 5
+        line 6
 hypervisors:
   vsphere:
     disk_controller_type: lsilogic

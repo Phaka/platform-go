@@ -15,10 +15,41 @@ type OperatingSystemDescriptor struct {
 	Flavor              *string                `yaml:"flavor,omitempty"`
 	DocumentationURL    *string                `yaml:"documentation,omitempty"`
 	RecommendedHardware *HardwareDescriptor    `yaml:"hardware,omitempty"`
+	BootMethods         *BootMethodsDescriptor `yaml:"boot,omitempty"`
 	Hypervisors         *HypervisorsDescriptor `yaml:"hypervisors,omitempty"`
 }
 
+var defaultBootMethod = &BootMethodDescriptor{
+	Commands: nil,
+	Files:    nil,
+}
+
+var defaultBootMethods = &BootMethodsDescriptor{
+	Http:   defaultBootMethod,
+	Cdrom:  defaultBootMethod,
+	Floppy: defaultBootMethod,
+}
+
+func (o *OperatingSystemDescriptor) GetBootMethods() BootMethods {
+	if o.BootMethods == nil {
+		return defaultBootMethods
+	}
+	return o.BootMethods
+}
+
+var defaultHypervisors = &HypervisorsDescriptor{
+	VSphere: &VSphereHypervisorDescriptor{
+		GuestOSType:        nil,
+		DiskControllerType: nil,
+		NetworkAdapterType: nil,
+		Firmware:           nil,
+	},
+}
+
 func (o *OperatingSystemDescriptor) GetHypervisors() Hypervisors {
+	if o.Hypervisors == nil {
+		return defaultHypervisors
+	}
 	return o.Hypervisors
 }
 
