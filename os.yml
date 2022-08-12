@@ -11,3 +11,9 @@ hardware:
   processors:
     count: 1
     cores: 1
+hypervisors:
+  vsphere:
+    disk_controller_type: lsilogic
+    firmware: bios
+    guest_os_type: otherGuest64
+    network_adapter_type: vmxnet3

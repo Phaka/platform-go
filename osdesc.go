@@ -2,18 +2,24 @@ package platform
 
 import (
 	"errors"
+
 	"gopkg.in/yaml.v3"
 )
 
 type OperatingSystemDescriptor struct {
-	Name                string              `yaml:"name,omitempty"`
-	Version             *string             `yaml:"version,omitempty"`
-	Architecture        string              `yaml:"architecture,omitempty"`
-	Release             *string             `yaml:"release,omitempty"`
-	DownloadURLs        []string            `yaml:"downloads,omitempty"`
-	Flavor              *string             `yaml:"flavor,omitempty"`
-	DocumentationURL    *string             `yaml:"documentation,omitempty"`
-	RecommendedHardware *HardwareDescriptor `yaml:"hardware,omitempty"`
+	Name                string                 `yaml:"name,omitempty"`
+	Version             *string                `yaml:"version,omitempty"`
+	Architecture        string                 `yaml:"architecture,omitempty"`
+	Release             *string                `yaml:"release,omitempty"`
+	DownloadURLs        []string               `yaml:"downloads,omitempty"`
+	Flavor              *string                `yaml:"flavor,omitempty"`
+	DocumentationURL    *string                `yaml:"documentation,omitempty"`
+	RecommendedHardware *HardwareDescriptor    `yaml:"hardware,omitempty"`
+	Hypervisors         *HypervisorsDescriptor `yaml:"hypervisors,omitempty"`
+}
+
+func (o *OperatingSystemDescriptor) GetHypervisors() Hypervisors {
+	return o.Hypervisors
 }
 
 func (o *OperatingSystemDescriptor) String() string {

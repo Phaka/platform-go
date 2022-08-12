@@ -22,6 +22,11 @@ func TestLoadOperatingSystem(t *testing.T) {
     type args struct {
         path string
     }
+    otherGuest64 := "otherGuest64"
+    lsilogic := "lsilogic"
+    vmxnet3 := "vmxnet3"
+    bios := "bios"
+
     tests := []struct {
         name    string
         args    args
@@ -49,6 +54,14 @@ func TestLoadOperatingSystem(t *testing.T) {
                     Processors: &ProcessorsDescriptor{
                         Count: &processorCount,
                         Cores: &processorCoreCount,
+                    },
+                },
+                Hypervisors: &HypervisorsDescriptor{
+                    VSphere: &VSphereHypervisorDescriptor{
+                        GuestOSType:        &otherGuest64,
+                        DiskControllerType: &lsilogic,
+                        NetworkAdapterType: &vmxnet3,
+                        Firmware:           &bios,
                     },
                 },
             },

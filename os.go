@@ -1,34 +1,36 @@
 package platform
 
 import (
-	"gopkg.in/yaml.v3"
-	"io/ioutil"
+    "io/ioutil"
+
+    "gopkg.in/yaml.v3"
 )
 
 type OperatingSystem interface {
-	GetName() string
-	GetVersion() string
-	GetArchitecture() string
-	GetRelease() string
-	GetDownloadURLs() []string
-	GetFlavor() string
-	GetDocumentationURL() string
-	GetRecommendedHardware() Hardware
-	Validate() error
+    GetName() string
+    GetVersion() string
+    GetArchitecture() string
+    GetRelease() string
+    GetDownloadURLs() []string
+    GetFlavor() string
+    GetDocumentationURL() string
+    GetRecommendedHardware() Hardware
+    Validate() error
+    GetHypervisors() Hypervisors
 }
 
 type OperatingSystems []OperatingSystem
 
 func LoadOperatingSystem(path string) (OperatingSystem, error) {
-	yamlFile, err := ioutil.ReadFile(path)
-	if err != nil {
-		return nil, err
-	}
+    yamlFile, err := ioutil.ReadFile(path)
+    if err != nil {
+        return nil, err
+    }
 
-	desc := &OperatingSystemDescriptor{}
-	err = yaml.Unmarshal(yamlFile, desc)
-	if err != nil {
-		return nil, err
-	}
-	return desc, nil
+    desc := &OperatingSystemDescriptor{}
+    err = yaml.Unmarshal(yamlFile, desc)
+    if err != nil {
+        return nil, err
+    }
+    return desc, nil
 }
