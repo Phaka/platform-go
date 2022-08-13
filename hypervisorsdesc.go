@@ -1,9 +1,9 @@
 package platform
 
 type HypervisorsDescriptor struct {
-    VSphere *VSphereHypervisorDescriptor `yaml:"vsphere,omitempty"`
+	VSphere *VSphereHypervisorDescriptor `yaml:"vsphere,omitempty"`
 }
 
-func (h *HypervisorsDescriptor) GetvSphere() VSphereHypervisor {
-    return h.VSphere
+func (h *HypervisorsDescriptor) GetVMware() VSphereHypervisor {
+	return h.VSphere
 }
