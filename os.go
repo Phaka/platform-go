@@ -38,6 +38,9 @@ type OperatingSystem interface {
 	// GetBootMethods returns the methods of booting and installing the operating system
 	GetBootMethods() BootMethods
 
+	// GetVariables returns the all the variables that are used by bootmethods
+	GetVariables() []Variable
+
 	// Validate returns an error if the operating system configuration is valid
 	Validate() error
 

@@ -20,6 +20,23 @@ type OperatingSystemDescriptor struct {
 	Hypervisors         *HypervisorsDescriptor `yaml:"hypervisors,omitempty"`
 }
 
+func (o *OperatingSystemDescriptor) GetVariables() (result []Variable) {
+	m := make(map[string]Variable)
+	for _, v := range o.BootMethods.Http.Variables {
+		m[v.GetName()] = v
+	}
+	for _, v := range o.BootMethods.Cdrom.Variables {
+		m[v.GetName()] = v
+	}
+	for _, v := range o.BootMethods.Floppy.Variables {
+		m[v.GetName()] = v
+	}
+	for _, v := range m {
+		result = append(result, v)
+	}
+	return result
+}
+
 func (o *OperatingSystemDescriptor) Save(path string) error {
 	bytes, err := yaml.Marshal(o)
 	if err != nil {
