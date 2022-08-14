@@ -6,6 +6,7 @@ import (
 	"log"
 	"path/filepath"
 	"strings"
+	"time"
 
 	"gopkg.in/yaml.v3"
 )
@@ -59,6 +60,14 @@ func (h Hypervisor) String() string {
 	return toYAML(h)
 }
 
+func (h Hypervisor) validate() error {
+	if h == nil {
+		return fmt.Errorf("platform: hypervisor is required")
+	}
+
+	return nil
+}
+
 type HypervisorKind string
 
 const (
@@ -76,9 +85,17 @@ func (h Hypervisors) validate() error {
 		return fmt.Errorf("platform: only one hypervisor is supported")
 	}
 
-	for _, kind := range AllHypervisorKinds() {
+	kinds := AllHypervisorKinds()
+	for _, kind := range kinds {
 		if _, ok := h[kind]; !ok {
 			return fmt.Errorf("platform: hypervisors \"%s\" is required", kind)
+		}
+	}
+
+	for _, x := range h {
+		err := x.validate()
+		if err != nil {
+			return err
 		}
 	}
 
@@ -105,6 +122,21 @@ type BootMethod struct {
 	Files     map[string]string `yaml:"files,omitempty"`
 	Delay     string            `yaml:"delay,omitempty"`
 	Variables []*Variable       `yaml:"variables,omitempty"`
+}
+
+func (b *BootMethod) validate() error {
+	if b.Name == "" {
+		return fmt.Errorf("platform: boot method name is required")
+	}
+	if b.Delay == "" {
+		return fmt.Errorf("platform: boot method delay is required")
+	}
+	_, err := time.ParseDuration(b.Delay)
+	if err != nil {
+		return fmt.Errorf("platform: boot method delay is invalid: %s", err)
+	}
+
+	return nil
 }
 
 type BootMethodKind string
@@ -137,6 +169,12 @@ func (b BootMethods) validate() error {
 	for _, kind := range BootMethodKinds() {
 		if _, ok := b[kind]; !ok {
 			return fmt.Errorf("platform: boot methods \"%s\" is required", kind)
+		}
+	}
+	for _, x := range b {
+		err := x.validate()
+		if err != nil {
+			return err
 		}
 	}
 	return nil
