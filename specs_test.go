@@ -182,7 +182,8 @@ hypervisors:
 				},
 				BootMethods: BootMethods{
 					BootMethodKindHttp: &BootMethod{
-						Name: "HTTP",
+						Username: "root",
+						Name:     "HTTP",
 						Commands: `a<enter><wait>
 <wait10>
 {{ .ServerUrl }}/install.conf<enter><wait>

@@ -115,6 +115,7 @@ type BootMethod struct {
 	Files     map[string]string `yaml:"files,omitempty"`
 	Delay     string            `yaml:"delay,omitempty"`
 	Variables []*Variable       `yaml:"variables,omitempty"`
+	Username  string            `yaml:"username,omitempty"`
 }
 
 func (b *BootMethod) validate() error {
@@ -252,6 +253,7 @@ var defaultBootMethods = BootMethods{
 		Files:     map[string]string{},
 		Delay:     "5s",
 		Variables: []*Variable{},
+		Username:  "root",
 	},
 	BootMethodKindCdrom: &BootMethod{
 		Name:      "CD-ROM",
@@ -259,6 +261,7 @@ var defaultBootMethods = BootMethods{
 		Files:     map[string]string{},
 		Delay:     "5s",
 		Variables: []*Variable{},
+		Username:  "root",
 	},
 	BootMethodKindFloppy: &BootMethod{
 		Name:      "Floppy",
@@ -266,6 +269,7 @@ var defaultBootMethods = BootMethods{
 		Files:     map[string]string{},
 		Delay:     "5s",
 		Variables: []*Variable{},
+		Username:  "root",
 	},
 }
 
@@ -380,6 +384,9 @@ func (o *OperatingSystem) UnmarshalYAML(value *yaml.Node) error {
 				// check if boot method name exists, if not assign it
 				if o.BootMethods[kind].Name == "" {
 					o.BootMethods[kind].Name = defaultBootMethods[kind].Name
+				}
+				if o.BootMethods[kind].Username == "" {
+					o.BootMethods[kind].Username = defaultBootMethods[kind].Username
 				}
 			}
 
