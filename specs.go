@@ -202,19 +202,25 @@ var defaultHypervisors = Hypervisors{
 
 var defaultBootMethods = BootMethods{
 	BootMethodKindHttp: &BootMethod{
-		Name:     "HTTP",
-		Commands: "",
-		Files:    map[string]string{},
+		Name:      "HTTP",
+		Commands:  "",
+		Files:     map[string]string{},
+		Delay:     "5s",
+		Variables: []*Variable{},
 	},
 	BootMethodKindCdrom: &BootMethod{
-		Name:     "CD-ROM",
-		Commands: "",
-		Files:    map[string]string{},
+		Name:      "CD-ROM",
+		Commands:  "",
+		Files:     map[string]string{},
+		Delay:     "5s",
+		Variables: []*Variable{},
 	},
 	BootMethodKindFloppy: &BootMethod{
-		Name:     "Floppy",
-		Commands: "",
-		Files:    map[string]string{},
+		Name:      "Floppy",
+		Commands:  "",
+		Files:     map[string]string{},
+		Delay:     "5s",
+		Variables: []*Variable{},
 	},
 }
 
