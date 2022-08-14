@@ -153,6 +153,22 @@ func (b *BootMethod) String() string {
 
 type BootMethods map[string]*BootMethod
 
+func (b BootMethods) Default() *BootMethod {
+	return b.Http()
+}
+
+func (b BootMethods) Http() *BootMethod {
+	return b[BootMethodKindHttp]
+}
+
+func (b BootMethods) Cd() *BootMethod {
+	return b[BootMethodKindHttp]
+}
+
+func (b BootMethods) Floppy() *BootMethod {
+	return b[BootMethodKindHttp]
+}
+
 func (b BootMethods) String() string {
 	return toYAML(b)
 }
