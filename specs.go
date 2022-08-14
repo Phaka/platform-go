@@ -85,13 +85,6 @@ func (h Hypervisors) validate() error {
 		return fmt.Errorf("platform: only one hypervisor is supported")
 	}
 
-	kinds := AllHypervisorKinds()
-	for _, kind := range kinds {
-		if _, ok := h[kind]; !ok {
-			return fmt.Errorf("platform: hypervisors \"%s\" is required", kind)
-		}
-	}
-
 	for _, x := range h {
 		err := x.validate()
 		if err != nil {
@@ -125,6 +118,9 @@ type BootMethod struct {
 }
 
 func (b *BootMethod) validate() error {
+	if b == nil {
+		return nil
+	}
 	if b.Name == "" {
 		return fmt.Errorf("platform: boot method name is required")
 	}
@@ -182,11 +178,6 @@ func (b BootMethods) validate() error {
 		return fmt.Errorf("platform: at least one boot method is required")
 	}
 
-	for _, kind := range BootMethodKinds() {
-		if _, ok := b[kind]; !ok {
-			return fmt.Errorf("platform: boot methods \"%s\" is required", kind)
-		}
-	}
 	for _, x := range b {
 		err := x.validate()
 		if err != nil {
@@ -375,17 +366,23 @@ func (o *OperatingSystem) UnmarshalYAML(value *yaml.Node) error {
 	} else {
 
 		for _, kind := range BootMethodKinds() {
-			kindLower := strings.ToLower(kind)
-			if _, ok := o.BootMethods[kindLower]; ok {
-				// so we have a lowercase key, but we really need to case it
-				// to match the kind
-				o.BootMethods[kind] = o.BootMethods[kindLower]
-				delete(o.BootMethods, kindLower)
-			}
+			// kindLower := strings.ToLower(kind)
+			// if _, ok := o.BootMethods[kindLower]; ok {
+			// 	// so we have a lowercase key, but we really need to case it
+			// 	// to match the kind
+			// 	o.BootMethods[kind] = o.BootMethods[kindLower]
+			// 	delete(o.BootMethods, kindLower)
+			// }
 
 			if _, ok := o.BootMethods[kind]; !ok {
-				o.BootMethods[kind] = defaultBootMethods[kind]
+				// o.BootMethods[kind] = nil
+			} else {
+				// check if boot method name exists, if not assign it
+				if o.BootMethods[kind].Name == "" {
+					o.BootMethods[kind].Name = defaultBootMethods[kind].Name
+				}
 			}
+
 		}
 	}
 
