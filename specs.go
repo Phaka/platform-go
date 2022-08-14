@@ -65,7 +65,7 @@ const (
 	HypervisorKindVMware = "vSphere"
 )
 
-type Hypervisors map[string]*Hypervisor
+type Hypervisors map[string]Hypervisor
 
 func (h Hypervisors) validate() error {
 	if h == nil {
@@ -190,7 +190,7 @@ var defaultHardware = Hardware{
 }
 
 var defaultHypervisors = Hypervisors{
-	HypervisorKindVMware: &Hypervisor{
+	HypervisorKindVMware: Hypervisor{
 		"Name":               "VMware vSphere",
 		"Id":                 "vsphere",
 		"GuestOSType":        "otherGuest64",
@@ -291,6 +291,21 @@ func (o *OperatingSystem) UnmarshalYAML(value *yaml.Node) error {
 
 			if _, ok := o.Hypervisors[kind]; !ok {
 				o.Hypervisors[kind] = defaultHypervisors[kind]
+			}
+
+			switch kind {
+			case HypervisorKindVMware:
+				hypervisor, _ := o.Hypervisors[kind]
+				oldNames := map[string]string{
+					"guest_os_type":        "GuestOSType",
+					"disk_controller_type": "DiskControllerType",
+					"network_adapter_type": "NetworkAdapterType",
+					"firmware":             "Firmware",
+				}
+				for old, new := range oldNames {
+					hypervisor[new] = hypervisor[old]
+					delete(hypervisor, old)
+				}
 			}
 		}
 	}
