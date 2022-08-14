@@ -173,11 +173,11 @@ hypervisors:
 					},
 				},
 				Hypervisors: Hypervisors{
-					HypervisorKindVMware: Hypervisor{
-						"DiskControllerType": "lsilogic",
-						"Firmware":           "bios",
-						"GuestOSType":        "otherGuest64",
-						"NetworkAdapterType": "e1000",
+					HypervisorKindVMware: &Hypervisor{
+						"disk_controller_type": "lsilogic",
+						"firmware":             "bios",
+						"guest_os_type":        "otherGuest64",
+						"network_adapter_type": "e1000",
 					},
 				},
 				BootMethods: BootMethods{
